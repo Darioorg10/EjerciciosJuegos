@@ -27,13 +27,13 @@ public class pareonone {
         do {
 
             // Pedimos si se quiere calcular o salir
-            opcion = UtilidadesJuegos.pedirOpcion();
+            opcion = UtilidadesPareONone.pedirOpcion();
 
             // Elegimos pares o nones (usuario). La máquina tiene que elegir lo contrario
             if (!opcion.equalsIgnoreCase("salir")) {
 
-                opcionUsuarioParesONones = UtilidadesJuegos.pedirOpcionParesONones();
-                opcionMaquinaParesONones = UtilidadesJuegos.pensamientoMaquinaParesONones(opcionUsuarioParesONones);
+                opcionUsuarioParesONones = UtilidadesPareONone.pedirOpcionParesONones();
+                opcionMaquinaParesONones = UtilidadesPareONone.pensamientoMaquinaParesONones(opcionUsuarioParesONones);
                 String textoOpcionMaquinaParesONones = """
                                                                                           Has elegido %s
                                                                                           Por lo tanto, la máquina se queda con los %s""".formatted(opcionUsuarioParesONones,
@@ -41,16 +41,16 @@ public class pareonone {
                 JOptionPane.showMessageDialog(null, textoOpcionMaquinaParesONones);
 
                 //  El usuario y la máquina eligen el número de dedos (dentro del rango)
-                opcionDedos = UtilidadesJuegos.pedirOpcionDedos();
+                opcionDedos = UtilidadesPareONone.pedirOpcionDedos();
 
-                opcionDedosMaquina = UtilidadesJuegos.opcionDedosMaquina();
+                opcionDedosMaquina = UtilidadesPareONone.opcionDedosMaquina();
                 String textoOpcionDedosMaquina = """
                                                                              La máquina ha elegido %d""".formatted(opcionDedosMaquina);
                 JOptionPane.showMessageDialog(null, textoOpcionDedosMaquina);
 
                 // Sumamos los resultados y vemos quién es el ganador y lo mostramos
-                suma = UtilidadesJuegos.sumaDedos(opcionDedos, opcionDedosMaquina);
-                ganador = UtilidadesJuegos.ganadorJuego(suma);
+                suma = UtilidadesPareONone.sumaDedos(opcionDedos, opcionDedosMaquina);
+                ganador = UtilidadesPareONone.ganadorJuego(suma);
 
                 String mostrarInformacion = """
                                               Has sacado %d dedos

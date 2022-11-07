@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
  *
  * @author dario
  */
-public class UtilidadesJuegos {
+public class UtilidadesPareONone {
 
     private static Random aleatorio = new Random();
-    
+
     // JUEGO PAREONONE
     // Pedimos si se va a jugar o a terminar y comprobamos que esté bien
     public static String mostrarMenuInicial() {
@@ -126,7 +126,5 @@ public class UtilidadesJuegos {
         }
         return ganador;
     }
-    
-    // JUEGO LA MORRA
 
 }
