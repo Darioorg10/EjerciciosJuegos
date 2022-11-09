@@ -20,12 +20,12 @@ public class UtilidadesMorra {
     public static String mostrarMenuInicial() {
 
         String texto = """
-                          ----------------------------------------------------------------
+                          --------------------------------------------------------------------
                                                     MENÚ
-                          ----------------------------------------------------------------
-                          Para jugar, escribe: jugar
+                          --------------------------------------------------------------------
+                          Para jugar una partida al mejor de 5, escribe: jugar
                           Para terminar el programa, escribe: salir
-                          ----------------------------------------------------------------""";
+                          ---------------------------------------------------------------------""";
 
         String opcion = JOptionPane.showInputDialog(texto);
         return opcion;
@@ -107,9 +107,9 @@ public class UtilidadesMorra {
     
     // Creamos la elección aleatorio de la máquina de la suma de dedos
     
-    public static int supuestaSumaMaquina(){
+    public static int supuestaSumaMaquina(int opcionDedosMaquina){
         int aleatorio3 = 0;
-        aleatorio3 = aleatorio.nextInt(1,10);
+        aleatorio3 = aleatorio.nextInt(opcionDedosMaquina,10);
         return aleatorio3;
     }
     
@@ -120,7 +120,7 @@ public class UtilidadesMorra {
     
     // Creamos el método que decide quién es el ganador
     
-    public static String ganador(int sumaDedos, int supuestaSumaUsuario, int supuestaSumaMaquina){
+    public static String ganador(int sumaDedos, int supuestaSumaUsuario, int supuestaSumaMaquina, int opcionDedosMaquina){
         
         String ganador="";
         
@@ -128,7 +128,7 @@ public class UtilidadesMorra {
             ganador = "usuario";            
         }
         if (sumaDedos == supuestaSumaMaquina) {
-            ganador = "máquina";            
+            ganador = "maquina";            
         }
         if (sumaDedos !=supuestaSumaUsuario && sumaDedos !=supuestaSumaMaquina ) {
             ganador="ninguno";            

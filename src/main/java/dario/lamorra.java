@@ -22,6 +22,9 @@ public class lamorra {
         int supuestaSumaUsuario;
         int supuestaSumaMaquina;
         int suma;
+        int rondasGanadasUsuario = 0;
+        int rondasGanadasMaquina = 0;
+        int rondasEmpatadas = 0;
 
         // Se repite hasta que digamos que termine
         do {
@@ -29,52 +32,83 @@ public class lamorra {
             opcion = UtilidadesMorra.pedirOpcion();
 
             if (!opcion.equalsIgnoreCase("salir")) {
-                
-                // Se piden los dedos que se quieren sacar
-                
-                opcionDedos = UtilidadesMorra.pedirOpcionDedos();
 
-                // Se pide la que el usuario crea que vaya a ser la suma entre sus dedos y los de la máquina
-                
-                supuestaSumaUsuario = UtilidadesMorra.supuestaSumaUsuario();
-                
-                // La máquina aleatoriamente elige su número de dedos
+                do {
+                    // Se piden los dedos que se quieren sacar
 
-                opcionDedosMaquina = UtilidadesMorra.opcionDedosMaquina();
+                    opcionDedos = UtilidadesMorra.pedirOpcionDedos();
 
-                String textoOpcionDedosMaquina = """
+                    // Se pide la que el usuario crea que vaya a ser la suma entre sus dedos y los de la máquina
+                    supuestaSumaUsuario = UtilidadesMorra.supuestaSumaUsuario();
+
+                    // La máquina aleatoriamente elige su número de dedos
+                    opcionDedosMaquina = UtilidadesMorra.opcionDedosMaquina();
+
+                    String textoOpcionDedosMaquina = """
                                                                              La máquina ha sacado %d dedos""".formatted(
-                        opcionDedosMaquina);
+                            opcionDedosMaquina);
 
-                JOptionPane.showMessageDialog(null, textoOpcionDedosMaquina);
-                
-                // La máquina aleatoriamente elige la que cree que será la suma entre los dedos del usuario y
-                // la máquina
-                
-                supuestaSumaMaquina = UtilidadesMorra.supuestaSumaMaquina();
+                    JOptionPane.showMessageDialog(null, textoOpcionDedosMaquina);
 
-                String textoSupuestaSumaMaquina = """
+                    // La máquina aleatoriamente elige la que cree que será la suma entre los dedos del usuario y
+                    // la máquina
+                    supuestaSumaMaquina = UtilidadesMorra.supuestaSumaMaquina(opcionDedosMaquina);
+
+                    String textoSupuestaSumaMaquina = """
                                                                                 La máquina cree que la suma será de %d dedos""".formatted(
-                        supuestaSumaMaquina);
+                            supuestaSumaMaquina);
 
-                JOptionPane.showMessageDialog(null, textoSupuestaSumaMaquina);
-                
-                // Se calcula la suma entre los dedos del usuario y los de la máquina
-                
-                suma = UtilidadesMorra.sumaDedos(opcionDedos, opcionDedosMaquina);
+                    JOptionPane.showMessageDialog(null, textoSupuestaSumaMaquina);
 
-                String textoSuma = """
+                    // Se calcula la suma entre los dedos del usuario y los de la máquina
+                    suma = UtilidadesMorra.sumaDedos(opcionDedos, opcionDedosMaquina);
+
+                    String textoSuma = """
                                                  La suma de los dedos es %d""".formatted(suma);
 
-                JOptionPane.showMessageDialog(null, textoSuma);
-                
-                // Se obtiene y se muestra el ganador
-                
-                ganador = UtilidadesMorra.ganador(suma, supuestaSumaUsuario, supuestaSumaMaquina);
+                    JOptionPane.showMessageDialog(null, textoSuma);
 
-                String textoGanador = """
-                                                      El ganador del juego es %s""".formatted(ganador);
-                JOptionPane.showMessageDialog(null, textoGanador);
+                    // Se obtiene y se muestra el ganador
+                    ganador = UtilidadesMorra.ganador(suma, supuestaSumaUsuario,
+                            supuestaSumaMaquina, opcionDedosMaquina);
+
+                    if (ganador.equalsIgnoreCase("usuario")) {
+
+                        rondasGanadasUsuario = rondasGanadasUsuario + 1;
+
+                    } else if (ganador.equalsIgnoreCase("maquina")) {
+
+                        rondasGanadasMaquina = rondasGanadasMaquina + 1;
+
+                    } else if (!ganador.equalsIgnoreCase("usuario") && !ganador.equalsIgnoreCase("maquina")) {
+
+                        rondasEmpatadas = rondasEmpatadas + 1;
+
+                    }
+
+                    String textoGanadorRonda = """
+                                                      El ganador de la ronda es %s""".formatted(ganador);
+                    JOptionPane.showMessageDialog(null, textoGanadorRonda);
+
+                    String textoGanadorControl = """
+                                                                    El usuario lleva %d rondas ganadas
+                                                                    La máquina lleva %d rondas ganadas
+                                                                    Se han empatado %d rondas""".formatted(rondasGanadasUsuario,
+                            rondasGanadasMaquina, rondasEmpatadas);
+
+                    JOptionPane.showMessageDialog(null, textoGanadorControl);
+
+                    if (rondasGanadasUsuario == 3) {
+
+                        JOptionPane.showMessageDialog(null, "Has ganado la partida");
+
+                    } else if (rondasGanadasMaquina == 3) {
+
+                        JOptionPane.showMessageDialog(null, "La máquina ha ganado la partida");
+
+                    }
+
+                } while (rondasGanadasUsuario < 3 && rondasGanadasMaquina < 3);
 
             } else {
                 opcion = "salir";
